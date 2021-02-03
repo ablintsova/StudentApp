@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Личный кабинет студента</string>
+
+    <string name="menu_item_news">Новости</string>
+    <string name="menu_item_schedule">Расписание</string>
+    <string name="menu_item_chats">Чаты</string>
+    <string name="menu_item_notifications">Уведомления</string>
+    <string name="menu_item_profile">Профиль</string>
+    <string name="sign_in_button_text">Войти</string>
+</resources>
