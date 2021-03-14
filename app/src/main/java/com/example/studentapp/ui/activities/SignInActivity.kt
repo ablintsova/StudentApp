@@ -5,46 +5,35 @@ import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.studentapp.R
 
 class SignInActivity : AppCompatActivity() {
-    lateinit var webView: WebView
+
     val url = "https://local.tspu.edu.ru/portal/login"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
-        setWebView()
+        findViewById<Button>(R.id.btnLogin).setOnClickListener {
+            onLoginButtonPressed()
+        }
+    }
 
-        /*findViewById<Button>(R.id.btnLogin).setOnClickListener {
+    private fun onLoginButtonPressed() {
+        val login = findViewById<EditText>(R.id.etLogin).text.toString()
+        val password = findViewById<EditText>(R.id.etPassword).text.toString()
+
+        if (isStringValid(login) && isStringValid(password)) {
+            // TODO: implement authorization
             val intent = Intent(this, NavigationActivity::class.java)
             startActivity(intent)
-        }*/
+        }
     }
 
-    private fun setWebView() {
-        webView = findViewById(R.id.browser)
-        webView.settings.javaScriptEnabled = true
-
-        webView.webViewClient = object : WebViewClient() {
-            // Override URL
-            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-                if (url == "https://local.tspu.edu.ru/portal/") {
-                    val intent = Intent(applicationContext, NavigationActivity::class.java)
-                    startActivity(intent)
-                    return true
-                }
-                return false
-            }
-        }
-        webView.loadUrl(url)
-    }
-
-    override fun onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack()
-        }
+    private fun isStringValid(str: String): Boolean {
+        return !str.isNullOrEmpty()
     }
 }

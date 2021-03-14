@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.SignInActivity">
 
-   <!-- <EditText
+    <EditText
         android:id="@+id/etLogin"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -29,18 +29,9 @@
         android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword"
+        android:text="@string/sign_in_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/sign_in_button_text"/>-->
-
-    <WebView
-        android:id="@+id/browser"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>
