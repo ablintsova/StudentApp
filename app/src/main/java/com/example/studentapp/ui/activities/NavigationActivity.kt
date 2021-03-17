@@ -1,6 +1,7 @@
 package com.example.studentapp.ui.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -8,13 +9,19 @@ import com.example.studentapp.R
 import com.example.studentapp.ui.fragments.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+const val NAV_TAG = "NavigationActivity"
 
 class NavigationActivity : AppCompatActivity() {
+
+
 
     lateinit var bottomNavigation: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.d(NAV_TAG, "onCreate: beginning")
+
         setContentView(R.layout.activity_navigation)
         bottomNavigation = findViewById(R.id.bottom_nav)
         setMenuItemsTextSize()
@@ -24,7 +31,7 @@ class NavigationActivity : AppCompatActivity() {
                     .replace(R.id.container, NewsFragment.newInstance())
                     .commit()
         }
-
+        Log.d(NAV_TAG, "onCreate: middle")
 
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
 
@@ -57,6 +64,8 @@ class NavigationActivity : AppCompatActivity() {
             }
             false
         }
+
+        Log.d(NAV_TAG, "onCreate: end")
     }
 
     private fun setMenuItemsTextSize() {
