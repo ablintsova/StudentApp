@@ -13,8 +13,6 @@ const val NAV_TAG = "NavigationActivity"
 
 class NavigationActivity : AppCompatActivity() {
 
-
-
     lateinit var bottomNavigation: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,8 +26,8 @@ class NavigationActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, NewsFragment.newInstance())
-                    .commit()
+                .replace(R.id.container, NewsFragment.newInstance())
+                .commit()
         }
         Log.d(NAV_TAG, "onCreate: middle")
 
@@ -38,28 +36,18 @@ class NavigationActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.itemNews -> {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.container, NewsFragment.newInstance())
-                            .commit()
+                        .replace(R.id.container, NewsFragment.newInstance())
+                        .commit()
                 }
                 R.id.itemSchedule -> {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.container, ScheduleFragment.newInstance())
-                            .commit()
-                }
-                R.id.itemChats -> {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.container, ChatFragment.newInstance())
-                            .commit()
-                }
-                R.id.itemNotifications -> {
-                    supportFragmentManager.beginTransaction()
-                            .replace(R.id.container, NotificationFragment.newInstance())
-                            .commit()
+                        .replace(R.id.container, ScheduleFragment.newInstance())
+                        .commit()
                 }
                 R.id.itemProfile -> {
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.container, ProfileFragment.newInstance())
-                            .commit()
+                        .replace(R.id.container, ProfileFragment.newInstance())
+                        .commit()
                 }
             }
             false
@@ -70,11 +58,12 @@ class NavigationActivity : AppCompatActivity() {
 
     private fun setMenuItemsTextSize() {
 
-        bottomNavigation.findViewById<View>(R.id.itemSchedule).findViewById<TextView>(R.id.largeLabel).textSize = 10f
-        bottomNavigation.findViewById<View>(R.id.itemNotifications).findViewById<TextView>(R.id.largeLabel).textSize = 10f
-        bottomNavigation.findViewById<View>(R.id.itemNews).findViewById<TextView>(R.id.largeLabel).textSize = 10f
-        bottomNavigation.findViewById<View>(R.id.itemChats).findViewById<TextView>(R.id.largeLabel).textSize = 10f
-        bottomNavigation.findViewById<View>(R.id.itemProfile).findViewById<TextView>(R.id.largeLabel).textSize = 10f
+        bottomNavigation.findViewById<View>(R.id.itemSchedule)
+            .findViewById<TextView>(R.id.largeLabel).textSize = 10f
+        bottomNavigation.findViewById<View>(R.id.itemNews)
+            .findViewById<TextView>(R.id.largeLabel).textSize = 10f
+        bottomNavigation.findViewById<View>(R.id.itemProfile)
+            .findViewById<TextView>(R.id.largeLabel).textSize = 10f
 
         /*var itemSchedule = bottomNavigation.findViewById<MenuItem>(R.id.itemSchedule)
         itemSchedule.*/

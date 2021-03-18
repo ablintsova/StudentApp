@@ -9,14 +9,6 @@
         android:icon="@drawable/ic_schedule"
         android:title="@string/menu_item_schedule"/>
     <item
-        android:id="@+id/itemChats"
-        android:icon="@drawable/ic_chat"
-        android:title="@string/menu_item_chats"/>
-    <item
-        android:id="@+id/itemNotifications"
-        android:icon="@drawable/ic_notifications"
-        android:title="@string/menu_item_notifications"/>
-    <item
         android:id="@+id/itemProfile"
         android:icon="@drawable/ic_profile"
         android:title="@string/menu_item_profile"/>
