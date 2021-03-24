@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.example.studentapp.R
-import com.example.studentapp.ui.activities.NAV_TAG
+import com.example.studentapp.model.Constants
 
 const val NEWS_TAG = "NewsFragment"
 
@@ -19,7 +19,6 @@ class NewsFragment : Fragment() {
         fun newInstance() = NewsFragment()
     }
 
-    private val url = "https://www.tspu.edu.ru/news"
     private lateinit var webView: WebView
 
     override fun onCreateView(
@@ -54,6 +53,6 @@ class NewsFragment : Fragment() {
                 return false
             }
         }
-        webView.loadUrl(url)
+        webView.loadUrl(Constants.NEWS_URL)
     }
 }
