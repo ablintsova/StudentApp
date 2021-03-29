@@ -3,7 +3,7 @@ package com.example.studentapp.model.api
 import com.google.gson.annotations.SerializedName
 
 class LoginData {
-    
+
     // Example data
     @SerializedName("title")
     var title: String? = null

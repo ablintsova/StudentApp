@@ -23,6 +23,7 @@ import javax.net.ssl.*
 import com.example.studentapp.R
 import com.example.studentapp.model.Constants
 import com.example.studentapp.model.api.LoginCallback
+import com.example.studentapp.model.api.LoginResponse
 import com.example.studentapp.model.api.TspuApi
 import kotlin.jvm.Throws
 
@@ -50,7 +51,7 @@ class SignInActivity : AppCompatActivity() {
 
         if (isStringValid(login)) {
             if (isStringValid(password)) {
-                tspuApi.login(login, password).enqueue(LoginCallback())
+                tspuApi.login(login, password).enqueue(LoginCallback(this))
                 Log.d(SIGN_IN_TAG, "onLoginButtonPressed: ready to login")
                 val intent = Intent(this, NavigationActivity::class.java)
                 startActivity(intent)
