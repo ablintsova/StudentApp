@@ -1,6 +1,5 @@
 package com.example.studentapp.ui.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -20,7 +19,6 @@ import com.example.studentapp.R
 import com.example.studentapp.model.Constants
 import com.example.studentapp.model.api.LoginCallback
 import com.example.studentapp.model.api.TspuApi
-import com.example.studentapp.model.entities.Student
 import kotlin.jvm.Throws
 
 const val SIGN_IN_TAG = "SignInActivity"
@@ -28,8 +26,6 @@ const val SIGN_IN_TAG = "SignInActivity"
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var tspuApi: TspuApi
-
-    var student = Student()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,13 +45,6 @@ class SignInActivity : AppCompatActivity() {
         if (isStringValid(login)) {
             if (isStringValid(password)) {
                 tspuApi.login(login, password).enqueue(LoginCallback(this))
-                Log.d(SIGN_IN_TAG, "onLoginButtonPressed: ready to login")
-
-
-                Toast.makeText(this, student.toString(), Toast.LENGTH_LONG).show()
-                val intent = Intent(this, NavigationActivity::class.java)
-                startActivity(intent)
-
             }
             else {
                 Log.e(SIGN_IN_TAG, "onLoginButtonPressed: password is empty")

@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvFaculty"
+        android:id="@+id/tvDepartment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -43,17 +43,6 @@
         app:layout_constraintStart_toStartOf="@+id/profilePicture"
         app:layout_constraintTop_toBottomOf="@+id/profilePicture" />
     <TextView
-        android:id="@+id/tvSpecialty"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:inputType="textMultiLine"
-        android:text="09.03.03 Информационные системы и технологии"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvFaculty"
-        app:layout_constraintTop_toBottomOf="@+id/tvFaculty" />
-    <TextView
         android:id="@+id/tvGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -61,8 +50,8 @@
         android:inputType="textMultiLine"
         android:text="Группа 473"
         android:textSize="17sp"
-        app:layout_constraintStart_toStartOf="@+id/tvSpecialty"
-        app:layout_constraintTop_toBottomOf="@+id/tvSpecialty" />
+        app:layout_constraintStart_toStartOf="@+id/tvDepartment"
+        app:layout_constraintTop_toBottomOf="@+id/tvDepartment" />
     <TextView
         android:id="@+id/tvYear"
         android:layout_width="0dp"

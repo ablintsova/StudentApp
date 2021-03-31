@@ -1,8 +1,13 @@
 package com.example.studentapp.model.api
 
+import android.content.Intent
 import android.util.Log
-import com.example.studentapp.model.entities.Student
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
+
+import com.example.studentapp.application.prefs
 import com.example.studentapp.model.entities.User
+import com.example.studentapp.ui.activities.NavigationActivity
 import com.example.studentapp.ui.activities.SignInActivity
 import retrofit2.Call
 import retrofit2.Response
@@ -11,6 +16,7 @@ class LoginCallback(var context: SignInActivity) : retrofit2.Callback<LoginRespo
 
     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
         Log.d("login onFailure", "error uploading: ${t.message}}")
+        Toast.makeText(context, "Ошибка! Проверьте правильность логина и пароля", Toast.LENGTH_LONG).show()
     }
 
     override fun onResponse(
@@ -21,24 +27,27 @@ class LoginCallback(var context: SignInActivity) : retrofit2.Callback<LoginRespo
         val errorBody = response.errorBody()
         Log.d("login onResponse", "response body: $body")
         Log.e("login onResponse", "response error: $errorBody")
-        var student = createStudent(response?.body()?.user)
-        context.student = student
 
-
+        if (body != null && errorBody == null) {
+            val u = response.body()?.user?.let {
+                saveStudent(it)
+            }
+            val intent = Intent(context, NavigationActivity::class.java)
+            startActivity(context, intent, null)
+        } else {
+            Toast.makeText(context, "Ошибка! Проверьте правильность логина и пароля", Toast.LENGTH_LONG)
+                .show()
+        }
     }
 
-    private fun createStudent(user: User?): Student {
-        val student = Student()
-        val u = user?.let {
-            student.id = it.id
-            student.name = it.name
-            student.email = it.person.email
-            student.phone = it.person.phone
-            student.photo = it.person.photo
-            student.course = it.person.training[0].course
-            student.group = it.person.training[0].group
-            student.department = it.person.training[0].department.title
-        }
-        return student
+    private fun saveStudent(user: User) {
+        prefs.studentId = user.id
+        prefs.studentName = user.name
+        prefs.studentEmail = user.person.email
+        prefs.studentPhone = user.person.phone
+        prefs.studentPhoto = user.person.photo
+        prefs.studentCourse = user.person.training[0].course
+        prefs.studentGroup = user.person.training[0].group
+        prefs.studentDepartment = user.person.training[0].department.title
     }
 }
