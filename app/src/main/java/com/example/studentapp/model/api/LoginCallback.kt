@@ -16,7 +16,7 @@ class LoginCallback(var context: SignInActivity) : retrofit2.Callback<LoginRespo
 
     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
         Log.d("login onFailure", "error uploading: ${t.message}}")
-        Toast.makeText(context, "Ошибка! Проверьте правильность логина и пароля", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, "Возникла ошибка! Попробуйте ещё раз", Toast.LENGTH_LONG).show()
     }
 
     override fun onResponse(
@@ -26,18 +26,25 @@ class LoginCallback(var context: SignInActivity) : retrofit2.Callback<LoginRespo
         val body = response.body()
         val errorBody = response.errorBody()
         Log.d("login onResponse", "response body: $body")
-        Log.e("login onResponse", "response error: $errorBody")
+        Log.e("login onResponse", "response error: $errorBody.")
 
         if (body != null && errorBody == null) {
-            val u = response.body()?.user?.let {
-                saveStudent(it)
-            }
-            val intent = Intent(context, NavigationActivity::class.java)
-            startActivity(context, intent, null)
-        } else {
+            onSuccess(response)
+        } else if (response.code() == 401) {
             Toast.makeText(context, "Ошибка! Проверьте правильность логина и пароля", Toast.LENGTH_LONG)
                 .show()
+        } else {
+            Toast.makeText(context, "Неизвестная ошибка! Попробуйте ещё раз", Toast.LENGTH_LONG)
+                .show()
         }
+    }
+
+    private fun onSuccess(response: Response<LoginResponse>) {
+        val u = response.body()?.user?.let {
+            saveStudent(it)
+        }
+        val intent = Intent(context, NavigationActivity::class.java)
+        startActivity(context, intent, null)
     }
 
     private fun saveStudent(user: User) {
