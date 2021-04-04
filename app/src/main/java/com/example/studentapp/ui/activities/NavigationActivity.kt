@@ -6,7 +6,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.studentapp.R
-import com.example.studentapp.ui.fragments.*
+import com.example.studentapp.ui.fragments.NewsFragment
+import com.example.studentapp.ui.fragments.ProfileFragment
+import com.example.studentapp.ui.fragments.ScheduleFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 const val NAV_TAG = "NavigationActivity"
@@ -26,7 +28,7 @@ class NavigationActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, NewsFragment.newInstance())
+                .replace(R.id.container, NewsFragment.newInstance(), "newsFragmentTag")
                 .commit()
         }
         Log.d(NAV_TAG, "onCreate: middle")
@@ -41,7 +43,7 @@ class NavigationActivity : AppCompatActivity() {
                 }
                 R.id.itemSchedule -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, ScheduleFragment.newInstance())
+                        .replace(R.id.container, ScheduleFragment.newInstance(),"newsFragmentTag")
                         .commit()
                 }
                 R.id.itemProfile -> {
@@ -64,8 +66,12 @@ class NavigationActivity : AppCompatActivity() {
             .findViewById<TextView>(R.id.largeLabel).textSize = 10f
         bottomNavigation.findViewById<View>(R.id.itemProfile)
             .findViewById<TextView>(R.id.largeLabel).textSize = 10f
-
-        /*var itemSchedule = bottomNavigation.findViewById<MenuItem>(R.id.itemSchedule)
-        itemSchedule.*/
+    }
+    override fun onBackPressed() {
+        val fragment: NewsFragment? = supportFragmentManager
+            .findFragmentByTag("newsFragmentTag") as NewsFragment?
+        fragment?.let {
+            it.onBackPressed()
+        }
     }
 }

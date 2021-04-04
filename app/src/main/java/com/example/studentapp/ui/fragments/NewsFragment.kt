@@ -1,13 +1,14 @@
 package com.example.studentapp.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.fragment.app.Fragment
 import com.example.studentapp.R
 import com.example.studentapp.model.Constants
 
@@ -37,6 +38,7 @@ class NewsFragment : Fragment() {
         Log.d(NEWS_TAG, "onViewCreated: end")
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun setWebView() {
         Log.d(NEWS_TAG, "setWebView: beginning")
 
@@ -44,15 +46,25 @@ class NewsFragment : Fragment() {
         webView.settings.javaScriptEnabled = true
 
         webView.webViewClient = object : WebViewClient() {
-            // Override URL
-            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-                if (url == "https://local.tspu.edu.ru/portal/") {
 
-                    return true
-                }
-                return false
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                view?.loadUrl("javascript:(function() { " +
+                        "document.getElementsByClassName('uk-sticky-placeholder')[0].style.display='none'; " +
+                        "document.getElementsByClassName('uk-breadcrumb')[0].style.display='none';" +
+                        "document.getElementsByClassName('tm-sidebar-a')[0].style.display='none';" +
+                        "document.getElementsByClassName('tm-block tm-bottom tm-block-image')[0].style.display='none';})()")
+
             }
         }
         webView.loadUrl(Constants.NEWS_URL)
+    }
+
+    fun onBackPressed(): Boolean {
+        if (webView.canGoBack()) {
+            webView.goBack()
+            return true
+        }
+        return false
     }
 }
