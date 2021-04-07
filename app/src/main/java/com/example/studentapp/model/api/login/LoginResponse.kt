@@ -1,4 +1,4 @@
-package com.example.studentapp.model.api
+package com.example.studentapp.model.api.login
 
 import com.example.studentapp.model.entities.User
 import com.google.gson.annotations.SerializedName

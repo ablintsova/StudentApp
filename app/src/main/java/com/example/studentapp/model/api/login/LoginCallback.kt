@@ -1,4 +1,4 @@
-package com.example.studentapp.model.api
+package com.example.studentapp.model.api.login
 
 import android.content.Intent
 import android.util.Log
