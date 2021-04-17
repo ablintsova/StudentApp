@@ -8,19 +8,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.studentapp.R
 import com.example.studentapp.presenter.NavigationPresenter
-import com.example.studentapp.presenter.NavigationPresenterInterface
+import com.example.studentapp.presenter.contracts.NavigationPresenterContract
 import com.example.studentapp.view.fragments.NewsFragment
 import com.example.studentapp.view.fragments.ProfileFragment
 import com.example.studentapp.view.fragments.ScheduleFragment
-import com.example.studentapp.view.interfaces.NavigationViewInterface
+import com.example.studentapp.view.contracts.NavigationViewContract
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 const val NAV_TAG = "NavigationActivity"
 
-class NavigationActivity : AppCompatActivity(), NavigationViewInterface {
+class NavigationActivity : AppCompatActivity(), NavigationViewContract {
 
     lateinit var bottomNavigation: BottomNavigationView
-    private lateinit var presenter: NavigationPresenterInterface
+    private lateinit var presenter: NavigationPresenterContract
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -8,14 +8,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.studentapp.R
 import com.example.studentapp.presenter.SignInPresenter
-import com.example.studentapp.presenter.SignInPresenterInterface
-import com.example.studentapp.view.interfaces.SignInViewInterface
+import com.example.studentapp.presenter.contracts.SignInPresenterContract
+import com.example.studentapp.view.contracts.SignInViewContract
 
 const val SIGN_IN_TAG = "SignInActivity"
 
-class SignInActivity : AppCompatActivity(), SignInViewInterface {
+class SignInActivity : AppCompatActivity(), SignInViewContract {
 
-    private lateinit var presenter: SignInPresenterInterface
+    private lateinit var presenter: SignInPresenterContract
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

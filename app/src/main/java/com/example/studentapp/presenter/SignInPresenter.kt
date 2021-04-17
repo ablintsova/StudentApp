@@ -7,12 +7,13 @@ import com.example.studentapp.utils.Network
 import com.example.studentapp.model.api.TspuApi
 import com.example.studentapp.model.entities.LoginResponse
 import com.example.studentapp.model.entities.User
+import com.example.studentapp.presenter.contracts.SignInPresenterContract
 import com.example.studentapp.view.activities.SIGN_IN_TAG
-import com.example.studentapp.view.interfaces.SignInViewInterface
+import com.example.studentapp.view.contracts.SignInViewContract
 import retrofit2.Call
 import retrofit2.Response
 
-class SignInPresenter(var view: SignInViewInterface?): SignInPresenterInterface {
+class SignInPresenter(var view: SignInViewContract?): SignInPresenterContract {
 
     private lateinit var tspuApi: TspuApi
 

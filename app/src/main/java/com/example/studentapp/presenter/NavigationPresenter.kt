@@ -5,15 +5,16 @@ import com.example.studentapp.application.prefs
 import com.example.studentapp.model.api.TspuApi
 import com.example.studentapp.model.entities.Group
 import com.example.studentapp.model.entities.Lesson
+import com.example.studentapp.presenter.contracts.NavigationPresenterContract
 import com.example.studentapp.utils.Constants
 import com.example.studentapp.utils.Network
 import com.example.studentapp.view.activities.NAV_TAG
-import com.example.studentapp.view.interfaces.NavigationViewInterface
+import com.example.studentapp.view.contracts.NavigationViewContract
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Response
 
-class NavigationPresenter(var view: NavigationViewInterface?): NavigationPresenterInterface {
+class NavigationPresenter(var view: NavigationViewContract?): NavigationPresenterContract {
     private lateinit var tspuApi: TspuApi
 
     override fun getApiData() {
