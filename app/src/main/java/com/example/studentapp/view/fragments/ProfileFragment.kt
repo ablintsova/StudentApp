@@ -1,4 +1,4 @@
-package com.example.studentapp.ui.fragments
+package com.example.studentapp.view.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.example.studentapp.R
 import com.example.studentapp.application.prefs
 
+const val PROFILE_TAG = "ProfileFragment"
 
 class ProfileFragment : Fragment() {
 
@@ -28,9 +29,9 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(NEWS_TAG, "onViewCreated: beginning")
+        Log.d(PROFILE_TAG, "onViewCreated: beginning")
         setStudentData()
-        Log.d(NEWS_TAG, "onViewCreated: end")
+        Log.d(PROFILE_TAG, "onViewCreated: end")
     }
 
     private fun setStudentData() {

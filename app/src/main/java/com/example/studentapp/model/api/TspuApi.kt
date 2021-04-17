@@ -1,6 +1,6 @@
 package com.example.studentapp.model.api
 
-import com.example.studentapp.model.api.login.LoginResponse
+import com.example.studentapp.model.entities.LoginResponse
 import com.example.studentapp.model.entities.Group
 import com.example.studentapp.model.entities.Lesson
 import retrofit2.Call

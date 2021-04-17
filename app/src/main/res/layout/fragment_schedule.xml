@@ -3,12 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.ScheduleFragment">
+    tools:context=".view.fragments.ScheduleFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Spinner
+        android:id="@+id/spinGroupList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/menu_item_schedule" />
-
+        android:layout_height="wrap_content" />
 </FrameLayout>

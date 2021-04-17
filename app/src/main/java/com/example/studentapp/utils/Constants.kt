@@ -1,4 +1,4 @@
-package com.example.studentapp.model
+package com.example.studentapp.utils
 
 object Constants {
     const val LOGIN_URL = "https://person.tspu.edu.ru/api/"

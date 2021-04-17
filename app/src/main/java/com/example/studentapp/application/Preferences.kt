@@ -2,6 +2,7 @@ package com.example.studentapp.application
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.studentapp.model.entities.Group
 
 class Preferences (context: Context)
 {
@@ -14,6 +15,8 @@ class Preferences (context: Context)
     private val STUDENT_COURSE = "student_course"
     private val STUDENT_GROUP = "student_group"
     private val STUDENT_DEPARTMENT = "student_department"
+    private val GROUPS = "groups"
+    private val TIMETABLE = "timetable"
 
     private val preferences: SharedPreferences = context.getSharedPreferences("Student", Context.MODE_PRIVATE)
 
@@ -48,4 +51,12 @@ class Preferences (context: Context)
     var studentDepartment: String?
         get() = preferences.getString(STUDENT_DEPARTMENT, DEF_STRING)
         set(value) = preferences.edit().putString(STUDENT_DEPARTMENT, value).apply()
+
+    var groups: String?
+        get() = preferences.getString(GROUPS, DEF_STRING)
+        set(value) = preferences.edit().putString(GROUPS, value).apply()
+
+    var timetable: String?
+        get() = preferences.getString(TIMETABLE, DEF_STRING)
+        set(value) = preferences.edit().putString(TIMETABLE, value).apply()
 }

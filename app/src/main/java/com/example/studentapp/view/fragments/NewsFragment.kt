@@ -1,4 +1,4 @@
-package com.example.studentapp.ui.fragments
+package com.example.studentapp.view.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,7 +10,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import com.example.studentapp.R
-import com.example.studentapp.model.Constants
+import com.example.studentapp.utils.Constants
 
 const val NEWS_TAG = "NewsFragment"
 

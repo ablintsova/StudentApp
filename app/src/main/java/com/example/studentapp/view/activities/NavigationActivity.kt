@@ -1,35 +1,35 @@
-package com.example.studentapp.ui.activities
+package com.example.studentapp.view.activities
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.studentapp.R
-import com.example.studentapp.model.Constants
-import com.example.studentapp.model.Network
-import com.example.studentapp.model.api.TspuApi
-import com.example.studentapp.model.api.groups.GroupsCallback
-import com.example.studentapp.model.api.login.LoginCallback
-import com.example.studentapp.model.api.timetable.TimetableCallback
-import com.example.studentapp.ui.fragments.NewsFragment
-import com.example.studentapp.ui.fragments.ProfileFragment
-import com.example.studentapp.ui.fragments.ScheduleFragment
+import com.example.studentapp.presenter.NavigationPresenter
+import com.example.studentapp.presenter.NavigationPresenterInterface
+import com.example.studentapp.view.fragments.NewsFragment
+import com.example.studentapp.view.fragments.ProfileFragment
+import com.example.studentapp.view.fragments.ScheduleFragment
+import com.example.studentapp.view.interfaces.NavigationViewInterface
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 const val NAV_TAG = "NavigationActivity"
 
-class NavigationActivity : AppCompatActivity() {
+class NavigationActivity : AppCompatActivity(), NavigationViewInterface {
 
     lateinit var bottomNavigation: BottomNavigationView
-    private lateinit var tspuApi: TspuApi
+    private lateinit var presenter: NavigationPresenterInterface
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         Log.d(NAV_TAG, "onCreate: beginning")
 
-        tspuApi = Network().getRetrofitClient(Constants.TIMETABLE_URL).create(TspuApi::class.java)
+        presenter = NavigationPresenter(this)
+        presenter.getApiData()
 
         setContentView(R.layout.activity_navigation)
         bottomNavigation = findViewById(R.id.bottom_nav)
@@ -52,10 +52,6 @@ class NavigationActivity : AppCompatActivity() {
                         .commit()
                 }
                 R.id.itemSchedule -> {
-                    Log.d(NAV_TAG, "onSchedule: ready to get groups")
-                    tspuApi.getGroups().enqueue(GroupsCallback(this))
-                    Log.d(NAV_TAG, "onSchedule: ready to get timetable")
-                    tspuApi.getTimetable("493").enqueue(TimetableCallback(this))
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.container, ScheduleFragment.newInstance())
                         .commit()
@@ -88,5 +84,9 @@ class NavigationActivity : AppCompatActivity() {
         fragment?.let {
             it.onBackPressed()
         }
+    }
+
+    override fun showMessage(text: String) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 }
