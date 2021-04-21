@@ -48,9 +48,13 @@ class ProfileFragment : Fragment() {
         course?.text = "Курс " + prefs.studentCourse
 
         val phone = activity?.findViewById<TextView>(R.id.tvPhone)
-        phone?.text = "Телефон: " + prefs.studentPhone
+        phone?.text = if (prefs.studentPhone.isNullOrEmpty())
+            "Телефон: не указан"
+        else "Телефон: " + prefs.studentPhone
 
         val email = activity?.findViewById<TextView>(R.id.tvEmail)
-        email?.text = "Email: " + prefs.studentEmail
+        email?.text = if (prefs.studentEmail.isNullOrEmpty())
+            "Email: не указан"
+        else "Email: " + prefs.studentEmail
     }
 }
