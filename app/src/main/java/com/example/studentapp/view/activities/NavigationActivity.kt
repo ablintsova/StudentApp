@@ -89,4 +89,9 @@ class NavigationActivity : AppCompatActivity(), NavigationViewContract {
     override fun showMessage(text: String) {
         Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
+
+    override fun onDestroy() {
+        presenter.onDestroy()
+        super.onDestroy()
+    }
 }

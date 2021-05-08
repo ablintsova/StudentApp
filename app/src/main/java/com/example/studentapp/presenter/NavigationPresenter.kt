@@ -21,9 +21,9 @@ class NavigationPresenter(var view: NavigationViewContract?): NavigationPresente
         tspuApi = Network().getRetrofitClient(Constants.TIMETABLE_URL).create(TspuApi::class.java)
         Log.d(NAV_TAG, "onSchedule: ready to get groups")
         getGroups()
-        Log.d(NAV_TAG, "onSchedule: ready to get timetable")
-        getTimetable()
     }
+
+
 
     override fun onDestroy() {
         view = null
@@ -61,35 +61,5 @@ class NavigationPresenter(var view: NavigationViewContract?): NavigationPresente
         })
     }
 
-    private fun getTimetable() {
-        tspuApi.getTimetable("493").enqueue(object : retrofit2.Callback<List<Lesson>>  {
-            override fun onFailure(call: Call<List<Lesson>>, t: Throwable) {
-                Log.e("timetable onFailure", "error uploading: ${t.message}}")
-                view?.showMessage("Возникла ошибка при получении расписания!")
-            }
 
-            override fun onResponse(
-                call: Call<List<Lesson>>,
-                response: Response<List<Lesson>>
-            ) {
-                val body = response.body()
-                val errorBody = response.errorBody()
-                Log.d("timetable onResponse", "response body: $body")
-                Log.e("timetable onResponse", "response error: $errorBody.")
-
-                if (body != null && errorBody == null) {
-                    onSuccess(response)
-                } else {
-                    view?.showMessage("Неизвестная ошибка при получении расписания! Попробуйте ещё раз")
-                }
-            }
-
-            private fun onSuccess(response: Response<List<Lesson>>) {
-                val gson = Gson()
-                response.body()?.let {
-                    prefs.timetable = gson.toJson(it)
-                }
-            }
-        })
-    }
 }
