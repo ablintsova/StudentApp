@@ -46,7 +46,7 @@ class SchedulePresenter(var view: ScheduleViewContract?, var activity: Navigatio
                 response.body()?.let {
                     prefs.timetable = gson.toJson(it)
                 }
-                view?.showTimetable()
+                view?.showTimetable(view?.weekToShow!!)
             }
         })
     }
