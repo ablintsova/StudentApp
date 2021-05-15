@@ -247,11 +247,23 @@ class ScheduleFragment : Fragment(), ScheduleViewContract {
                         tableLayout.addView(tableRowDate)
                     }
 
+
+
                     tableLayout.addView(tableRowTime)
                     tableLayout.addView(tableRowTitle)
                     tableLayout.addView(tableRowTeacher)
                     tableLayout.addView(tableRowRoom)
 
+                    if (timetable[i].subgroup != "") {
+                        val tableRowSubgroup = TableRow(this.context)
+                        val tvSubgroup = TextView(this.context)
+                        tvSubgroup.setPadding(10, 10, 10, 10)
+                        tvSubgroup.gravity = Gravity.START
+                        tvSubgroup.text = "подгр. " + timetable[i].subgroup
+                        tvSubgroup.setTextColor(ContextCompat.getColor(this.context!!, R.color.blue_900))
+                        tableRowSubgroup.addView(tvSubgroup)
+                        tableLayout.addView(tableRowSubgroup)
+                    }
                     val v = View(this.context)
                     v.layoutParams = TableLayout.LayoutParams(
                         TableRow.LayoutParams.MATCH_PARENT, 1
