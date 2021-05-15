@@ -9,4 +9,6 @@
     <string name="enter_password">Введите пароль</string>
     <string name="goToPreviousWeek"><![CDATA[<]]></string>
     <string name="goToNextWeek"><![CDATA[>]]></string>
+    <string name="choose_department">Выберите факультет:</string>
+    <string name="choose_group">Выберите группу:</string>
 </resources>

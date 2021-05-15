@@ -5,12 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingTop="8dp"
     tools:context=".view.fragments.ScheduleFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_department"
+        android:paddingLeft="8dp"/>
+
+    <Spinner
+        android:id="@+id/spinDepartmentList"
+        style="@style/spinner_style" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_group"
+        android:paddingLeft="8dp"/>
 
     <Spinner
         android:id="@+id/spinGroupList"
-        style ="@style/spinner_style"/>
-
+        style="@style/spinner_style" />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

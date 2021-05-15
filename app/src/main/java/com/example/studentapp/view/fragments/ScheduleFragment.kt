@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
+import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import com.example.studentapp.R
 import com.example.studentapp.application.prefs
@@ -23,6 +24,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
 import java.text.SimpleDateFormat
+import java.time.DayOfWeek
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -54,7 +56,8 @@ class ScheduleFragment : Fragment(), ScheduleViewContract {
 
         tableLayout = activity?.findViewById(R.id.tblSchedule)!!
 
-        setSpinner()
+        setDepartmentSpinner()
+        setGroupSpinner()
         setWeekButtons()
         setWeek()
 
@@ -70,9 +73,36 @@ class ScheduleFragment : Fragment(), ScheduleViewContract {
         return inflater.inflate(R.layout.fragment_schedule, container, false)
     }
 
-    private fun setSpinner() {
+    private fun setDepartmentSpinner() {
+        val spinner = activity?.findViewById<Spinner>(R.id.spinDepartmentList)
+        val departments = getDepartmentsArray()
+        val adapter = this.context?.let {
+            ArrayAdapter(
+                it, android.R.layout.simple_spinner_item, departments
+            )
+        }
+        spinner?.adapter = adapter
+        spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val department = parent?.getItemAtPosition(position).toString()
+                setGroupSpinner(department)
+            }
+        }
+
+    }
+
+    private fun setGroupSpinner(department: String = "БХФ") {
         val spinner = activity?.findViewById<Spinner>(R.id.spinGroupList)
-        val groups = getGroupsArray()
+        val groups = getGroupsArray(department)
         val adapter = this.context?.let {
             ArrayAdapter(
                 it, android.R.layout.simple_spinner_item, groups
@@ -123,13 +153,24 @@ class ScheduleFragment : Fragment(), ScheduleViewContract {
     }
 
 
-    private fun getGroupsArray(): ArrayList<String> {
+    private fun getDepartmentsArray(): ArrayList<String> {
+        val type: Type = object : TypeToken<List<Group>>() {}.type
+        val groups = Gson().fromJson<List<Group>>(prefs.groups, type)
+        val departmentsList = ArrayList<String>()
+        groups.forEach { group ->
+            departmentsList.add(group.department)
+        }
+        return departmentsList.distinct() as ArrayList<String>
+    }
+    private fun getGroupsArray(department: String): ArrayList<String> {
         Log.d(SCHEDULE_TAG, "getGroupsArray begin")
         val type: Type = object : TypeToken<List<Group>>() {}.type
         val groups = Gson().fromJson<List<Group>>(prefs.groups, type)
         val groupsList = ArrayList<String>()
         groups.forEach { group ->
-            groupsList.add(group.number)
+            if (group.department == department) {
+                groupsList.add(group.number)
+            }
         }
         Log.d(SCHEDULE_TAG, "getGroupsArray end")
         return groupsList
@@ -158,6 +199,7 @@ class ScheduleFragment : Fragment(), ScheduleViewContract {
                     tvTime.setPadding(10, 10, 10, 10)
                     tvTime.gravity = Gravity.START
                     tvTime.text = getTime(timetable[i].start) + " - " + getTime(timetable[i].end)
+                    tvTime.textSize = 15.0F
                     tableRowTime.addView(tvTime)
 
                     val tableRowTitle = TableRow(this.context)
@@ -218,6 +260,23 @@ class ScheduleFragment : Fragment(), ScheduleViewContract {
                 }
             }
         }
+        if (tableLayout.isEmpty()) {
+            val tableRow = TableRow(this.context)
+            tableRow.setBackgroundColor(
+                ContextCompat.getColor(
+                    this.context!!,
+                    R.color.blue_second_400
+                )
+            )
+            val tvMessage = TextView(this.context)
+            tvMessage.setPadding(16, 24, 16, 24)
+            tvMessage.text = "Нет событий для отображения"
+            tvMessage.textSize = 16.0F
+            tvMessage.setTextColor(ContextCompat.getColor(this.context!!, R.color.white))
+            tableRow.addView(tvMessage)
+            tableRow.gravity = Gravity.CENTER
+            tableLayout.addView(tableRow)
+        }
     }
 
     private fun getTime(dateTime: String): String {
@@ -254,7 +313,7 @@ class ScheduleFragment : Fragment(), ScheduleViewContract {
     private fun getWeek(weekNumber: Int): String {
         val cal = Calendar.getInstance()
         cal.set(Calendar.WEEK_OF_YEAR, weekNumber)
-        cal.set(Calendar.DAY_OF_WEEK, cal.getActualMinimum(Calendar.DAY_OF_WEEK))
+        cal.set(Calendar.DAY_OF_WEEK, cal.getActualMinimum(Calendar.DAY_OF_WEEK)+1)
         val firstDay = cal.time
         cal.set(Calendar.DAY_OF_WEEK,cal.getActualMaximum(Calendar.DAY_OF_WEEK))
         val lastDay = cal.time
