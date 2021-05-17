@@ -12,10 +12,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:src="@drawable/user_64"
-        app:tint="@color/blue_400"
+        app:layout_constraintEnd_toStartOf="@+id/tvFullName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/blue_400" />
 
     <TextView
         android:id="@+id/tvFullName"
@@ -25,12 +27,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:inputType="textMultiLine"
-        android:text="Николай Васильевич Гоголь-Моголь"
+        android:textColor="@color/blue_900"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/profilePicture"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Николай Васильевич Гоголь-Моголь" />
 
     <TextView
         android:id="@+id/tvDepartment"
@@ -38,65 +41,112 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:inputType="textMultiLine"
-        android:text="Физико-математический факультет"
+        android:textColor="@color/blue_900"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/profilePicture"
-        app:layout_constraintTop_toBottomOf="@+id/profilePicture" />
+        app:layout_constraintTop_toBottomOf="@+id/profilePicture"
+        tools:text="Физико-математический факультет" />
+
+    <TextView
+        android:id="@+id/tvGroupText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Группа: "
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="@+id/tvDepartment"
+        app:layout_constraintTop_toBottomOf="@+id/tvDepartment" />
+
     <TextView
         android:id="@+id/tvGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:inputType="textMultiLine"
-        android:text="Группа 473"
+        android:textColor="@color/blue_700"
         android:textSize="17sp"
-        app:layout_constraintStart_toStartOf="@+id/tvDepartment"
-        app:layout_constraintTop_toBottomOf="@+id/tvDepartment" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvGroupText"
+        app:layout_constraintTop_toBottomOf="@+id/tvDepartment"
+        tools:text="473" />
+    <TextView
+        android:id="@+id/tvYearText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Курс: "
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="@+id/tvGroupText"
+        app:layout_constraintTop_toBottomOf="@+id/tvGroupText" />
+
     <TextView
         android:id="@+id/tvYear"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:inputType="textMultiLine"
-        android:text="3 курс"
+        android:textColor="@color/blue_700"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvGroup"
-        app:layout_constraintTop_toBottomOf="@+id/tvGroup" />
+        app:layout_constraintStart_toEndOf="@+id/tvYearText"
+        app:layout_constraintTop_toBottomOf="@+id/tvGroupText"
+        tools:text="3" />
+
     <TextView
         android:id="@+id/tvHeader"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:inputType="textMultiLine"
-        android:text="Личные данные"
-        android:textSize="22sp"
+        android:textColor="@color/blue_900"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvYear"
-        app:layout_constraintTop_toBottomOf="@+id/tvYear" />
+        app:layout_constraintStart_toStartOf="@+id/tvYearText"
+        app:layout_constraintTop_toBottomOf="@+id/tvYearText"
+        android:text="Личные данные" />
+    <TextView
+        android:id="@+id/tvPhoneText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Телефон: "
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="@+id/tvHeader"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeader" />
+
     <TextView
         android:id="@+id/tvPhone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:inputType="textMultiLine"
-        android:text="Телефон: +79234567890"
+        android:textColor="@color/blue_700"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvHeader"
-        app:layout_constraintTop_toBottomOf="@+id/tvHeader" />
+        app:layout_constraintStart_toEndOf="@+id/tvPhoneText"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeader"
+        tools:text="+79234567890" />
+    <TextView
+        android:id="@+id/tvEmailText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:inputType="textMultiLine"
+        android:text="E-mail: "
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="@+id/tvPhoneText"
+        app:layout_constraintTop_toBottomOf="@+id/tvPhoneText" />
+
     <TextView
         android:id="@+id/tvEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:inputType="textMultiLine"
-        android:text="E-mail: gogol@google.com"
+        android:textColor="@color/blue_700"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvPhone"
-        app:layout_constraintTop_toBottomOf="@+id/tvPhone" />
+        app:layout_constraintStart_toEndOf="@+id/tvEmailText"
+        app:layout_constraintTop_toBottomOf="@+id/tvPhoneText"
+        tools:text="gogol@google.com" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

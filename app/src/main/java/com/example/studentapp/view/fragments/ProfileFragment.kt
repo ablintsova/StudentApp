@@ -42,19 +42,19 @@ class ProfileFragment : Fragment() {
         department?.text = prefs.studentDepartment
 
         val group = activity?.findViewById<TextView>(R.id.tvGroup)
-        group?.text = "Группа " + prefs.studentGroup
+        group?.text = prefs.studentGroup
 
         val course = activity?.findViewById<TextView>(R.id.tvYear)
-        course?.text = "Курс " + prefs.studentCourse
+        course?.text = prefs.studentCourse
 
         val phone = activity?.findViewById<TextView>(R.id.tvPhone)
         phone?.text = if (prefs.studentPhone.isNullOrEmpty())
-            "Телефон: не указан"
-        else "Телефон: " + prefs.studentPhone
+            "не указан"
+        else prefs.studentPhone
 
         val email = activity?.findViewById<TextView>(R.id.tvEmail)
         email?.text = if (prefs.studentEmail.isNullOrEmpty())
-            "Email: не указан"
-        else "Email: " + prefs.studentEmail
+            "не указан"
+        else prefs.studentEmail
     }
 }
