@@ -53,6 +53,7 @@ class NewsFragment : Fragment() {
                         "document.getElementsByClassName('uk-sticky-placeholder')[0].style.display='none'; " +
                         "document.getElementsByClassName('uk-breadcrumb')[0].style.display='none';" +
                         "document.getElementsByClassName('tm-sidebar-a')[0].style.display='none';" +
+                        "document.getElementsByClassName('likes-block_right')[0].style.display='none';" +
                         "document.getElementsByClassName('tm-block tm-bottom tm-block-image')[0].style.display='none';})()")
 
             }
